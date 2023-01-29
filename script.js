@@ -14,6 +14,10 @@ const convert = (k) => {
 mainSection.addEventListener('click', e => {
   if (e.target.id === 'search-button') {
     e.preventDefault;
+
+    currentForecast.innerHTML = '';
+    weatherCards.innerHTML = '';
+
     let city = searchInput.value;
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`)
       .then(response => response.json())
@@ -95,6 +99,8 @@ mainSection.addEventListener('click', e => {
           cardBody.append(hum);
 
           weatherCards.append(card);
+
+          searchInput.value = '';
         }
       }
     )
