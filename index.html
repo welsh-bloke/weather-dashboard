@@ -8,13 +8,14 @@
   <style>
     h5 {
       margin: 0;
+      font-size: 1.2em;
     }
     .weather-icon {
       width: 25%;
     }
     .current-weather-icon {
-      width: 9%;
-      margin: 0;
+      width: 50px;
+      margin-top: -12px;
     }
     .card {
       background: darkgray;
@@ -39,8 +40,11 @@
               <label class="fs-4 mt-3" for="city-search">Search For A City</label>
               <input type="text" class="form-control" id="city-search">
             </div>
-            <button type="submit" class="btn btn-primary" id="search-button">Search</button>
+            <button type="submit" class="btn btn-info w-100" id="search-button" data-button="submit">Search</button>
           </form>
+          <div id="search-history" class="mt-3 d-none">
+            <h5>Recent Searches</h5>
+          </div>
         </div>
         <div class="col-md-9">
           <div class="row">
