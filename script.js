@@ -44,7 +44,7 @@ const citySearch = (e) => {
   let city = capitalize(searchInput.value);
 
 
-  fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`)
+  fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`)
     .then(response => response.json())
     .then(cities => {
       let city = cities[0];
@@ -53,7 +53,7 @@ const citySearch = (e) => {
 
       console.log(city);
 
-      return fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`);
+      return fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`);
     }
   )
     .then(response => response.json())
