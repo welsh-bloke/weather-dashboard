@@ -17,6 +17,10 @@ const searchDuplicate = (city, arr) => {
   return arr.includes(city);
 }
 
+const capitalize = (city) => {
+  return city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
+}
+
 const citySearch = (e) => {
   if (searchButton.getAttribute('data-button') === 'submit') {
     e.preventDefault;
@@ -37,7 +41,7 @@ const citySearch = (e) => {
   //   city = historySearchButton.getAttribute('data-searchTerm');
   // }
 
-  city = searchInput.value;
+  let city = capitalize(searchInput.value);
 
 
   fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`)
@@ -46,6 +50,8 @@ const citySearch = (e) => {
       let city = cities[0];
       let lat = city.lat;
       let lon = city.lon;
+
+      console.log(city);
 
       return fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`);
     }
@@ -57,10 +63,15 @@ const citySearch = (e) => {
       const today = list[0];
       const forecast = [list[7], list[15], list[23], list[31], list[39]];
 
+      let cityName = document.createElement('p');
+      cityName.classList.add('fs-4', 'me-2', 'd-inline')
+      cityName.textContent = city + ': ';
+      currentForecast.append(cityName);
+
       let d = new Date(list[0].dt_txt);
       let currentDate = document.createElement('span');
       currentDate.classList.add('fs-4')
-      currentDate.append(`${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`);
+      currentDate.append(`(${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()})`);
       currentForecast.append(currentDate);
 
       let weatherIcon = document.createElement('img');
