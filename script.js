@@ -6,7 +6,6 @@ const searchInput = document.querySelector('#city-search');
 const searchHistory = document.querySelector('#search-history');
 const weatherCards = document.querySelector('#weather-cards');
 const currentForecast = document.querySelector('#current-forecast');
-//let historySearchButton = document.createElement('button');
 
 const convert = (k) => {
   const c = k -273.15;
@@ -21,12 +20,10 @@ const capitalize = (city) => {
   return city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
 }
 
-const citySearch = (e) => {
+const citySearch = (e, searchTerm) => {
   if (searchButton.getAttribute('data-button') === 'submit') {
     e.preventDefault;
   }
-
-  console.log(e.target.getAttribute('data-button'));
 
   currentForecast.innerHTML = '';
   weatherCards.innerHTML = '';
@@ -34,15 +31,8 @@ const citySearch = (e) => {
   searchHistory.innerHTML = '';
   searchHistory.classList.remove('d-none')
 
-  // let city = '';
-  // if (e.target.getAttribute('data-button') === 'submit') {
-  //   city = searchInput.value;
-  // } else {
-  //   city = historySearchButton.getAttribute('data-searchTerm');
-  // }
-
-  let city = capitalize(searchInput.value);
-
+  // let city = capitalize(searchInput.value);
+  let city = capitalize(searchTerm);
 
   fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`)
     .then(response => response.json())
@@ -50,8 +40,6 @@ const citySearch = (e) => {
       let city = cities[0];
       let lat = city.lat;
       let lon = city.lon;
-
-      console.log(city);
 
       return fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`);
     }
@@ -161,13 +149,14 @@ const citySearch = (e) => {
 }
 
 searchHistory.addEventListener('click', e => {
+  let searchTerm = e.target.getAttribute("data-button");
   if (e.target.classList.contains('historyButton')) {
-    citySearch(e);
+    citySearch(e, searchTerm);
   }
 });
 
 mainSection.addEventListener('click', e => {
   if (e.target.id === 'search-button') {
-    citySearch(e);
+    citySearch(e, searchInput.value);
   }
 });
