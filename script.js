@@ -17,6 +17,7 @@ mainSection.addEventListener('click', e => {
 
     currentForecast.innerHTML = '';
     weatherCards.innerHTML = '';
+    currentForecast.classList.remove('d-none');
 
     let city = searchInput.value;
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`)
@@ -35,11 +36,11 @@ mainSection.addEventListener('click', e => {
 
         const list = data.list;
         const today = list[0];
-        const forecast = [list[8], list[16], list[24], list[32], list[39]];
+        const forecast = [list[7], list[15], list[23], list[31], list[39]];
 
         let d = new Date(list[0].dt_txt);
-        let currentDate = document.createElement('h5');
-        currentDate.append(`${d.getDate()}/${d.getMonth()}/${d.getFullYear()}`);
+        let currentDate = document.createElement('span');
+        currentDate.append(`${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`);
         currentForecast.append(currentDate);
 
         let weatherIcon = document.createElement('img');
@@ -62,20 +63,28 @@ mainSection.addEventListener('click', e => {
         hum.append('Humidity ' + list[0].main.humidity);
         currentForecast.append(hum);
 
+        const heading = document.createElement('h4');
+        heading.textContent = '5 Day Forecast:';
+        weatherCards.append(heading);
+
         for (let i = 0; i < forecast.length; i++) {
           console.log(forecast[i]);
           let d = new Date(forecast[i].dt_txt);
 
+          const col = document.createElement('div');
+          col.className = 'col-lg';
+
           const card = document.createElement('div');
-          card.classList.add ('card', 'current-forecast');
+          card.classList.add ('card', 'future-forecast', 'mb-3');
+          col.append(card);
 
           const cardBody = document.createElement('div');
           cardBody.className = 'card-body';
-          card.append(cardBody)
+          card.append(cardBody);
 
           const forecastDate = document.createElement('h5');
           forecastDate.className = 'forecast-date';
-          forecastDate.append(`${d.getDate()}/${d.getMonth()}/${d.getFullYear()}`);
+          forecastDate.append(`${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`);
           cardBody.append(forecastDate);
 
           const weatherIcon = document.createElement('img');
@@ -98,7 +107,7 @@ mainSection.addEventListener('click', e => {
           hum.append('Humidity ' + forecast[i].main.humidity);
           cardBody.append(hum);
 
-          weatherCards.append(card);
+          weatherCards.append(col);
 
           searchInput.value = '';
         }
