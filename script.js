@@ -147,8 +147,10 @@ const citySearch = (e, searchTerm) => {
     }
   )
   .catch(err => {
-    const errorMsg = 'There was a problem fetching a weather forecast for your search';
-    currentForecast.classList.add('bg-danger', 'ps-0');
+    //const errorMsg = 'There was a problem fetching a weather forecast for your search';
+    const errorMsg = document.createElement('h5');
+    errorMsg.classList.add('text-white', 'text-center', 'p-3');
+    errorMsg.textContent = 'There was a problem fetching a weather forecast for your search';
     currentForecast.append(errorMsg);
   })
 }
