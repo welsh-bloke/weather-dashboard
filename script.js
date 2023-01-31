@@ -21,9 +21,6 @@ const capitalize = (city) => {
 }
 
 const citySearch = (e, searchTerm) => {
-  // if (searchButton.getAttribute('data-button') === 'submit') {
-  //   e.preventDefault;
-  // }
   e.preventDefault();
 
   currentForecast.innerHTML = '';
@@ -149,6 +146,11 @@ const citySearch = (e, searchTerm) => {
       });
     }
   )
+  .catch(err => {
+    const errorMsg = 'There was a problem fetching a weather forecast for your search';
+    currentForecast.classList.add('bg-danger', 'ps-0');
+    currentForecast.append(errorMsg);
+  })
 }
 
 searchHistory.addEventListener('click', e => {
