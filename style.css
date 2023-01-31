@@ -1,0 +1,22 @@
+body {
+  background: #eee;
+}
+.container-fluid {
+  width: 80%;
+}
+h5 {
+  margin: 0;
+  font-size: 1.2em;
+}
+.weather-icon {
+  width: 25%;
+}
+.current-weather-icon {
+  width: 45px;
+  margin-top: -4px;
+}
+.card {
+  background: darkgray;
+  color: white;
+  border: none;
+}

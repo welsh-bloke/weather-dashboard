@@ -21,9 +21,10 @@ const capitalize = (city) => {
 }
 
 const citySearch = (e, searchTerm) => {
-  if (searchButton.getAttribute('data-button') === 'submit') {
-    e.preventDefault;
-  }
+  // if (searchButton.getAttribute('data-button') === 'submit') {
+  //   e.preventDefault;
+  // }
+  e.preventDefault();
 
   currentForecast.innerHTML = '';
   weatherCards.innerHTML = '';
@@ -66,6 +67,8 @@ const citySearch = (e, searchTerm) => {
       weatherIcon.className = 'current-weather-icon';
       weatherIcon.setAttribute('src', `https://openweathermap.org/img/wn/${list[0].weather[0].icon}.png`);
       currentForecast.append(weatherIcon);
+
+
 
       let temp = document.createElement('p');
       temp.className = 'temp';
