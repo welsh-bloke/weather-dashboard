@@ -37,6 +37,10 @@ The application uses the following screens:
 
 <img src="./img/error.png" width="600">
 
+## User types city with mixed case characters - app formats it nicely before adding to local storage
+
+<img src="./img/mixed-case.png" width="600">
+
 ## Deployment
 
 The application wa deployed to GitHub Pages using the following process:
